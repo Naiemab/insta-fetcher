@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Utils\FetchService\FetchService;
+use App\Utils\FetchService;
 use Illuminate\Http\Request;
 use App\Models\Campaign;
 use Illuminate\Support\Facades\Input;
@@ -50,7 +50,9 @@ class CampaignsController extends Controller
 
     public function token()
     {
-        return FetchService::token();
+        $token = FetchService::access_token(request()->get('code'));
+        FetchService::updateToken($token);
+        return redirect()->to('/');
     }
 
 }

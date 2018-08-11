@@ -8,7 +8,7 @@
 <body>
 
 <h1 style="margin-left:40%;margin-right:40%;display:block;margin-top:1%;margin-bottom:0%">Enter Tag</h1>
-
+{{ csrf_field() }}
 <ul>
     <form action="/tag" method="post">
         <input type="text" name="tag" placeholder="Enter Tag" style="margin-left:37%;margin-right:40%;display:block;margin-top:4%;margin-bottom:0%">

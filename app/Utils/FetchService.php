@@ -1,46 +1,44 @@
 <?php
 
-namespace App\Utils\FetchService;
+namespace App\Utils;
 
 // code for access_token = d83bc59f7e6e4a92a121be365cbc2beb
 
-Class FetchService {
-    /**
-     * @param $tag
-     * @return mixed
-     */
-    static public function fetch($tag)
-        {
-            $curl = curl_init();
-            $access_token ="675620457.f368a9b.1534ad0582a44b9e998910f5fcf1c0b7";
-            curl_setopt_array($curl, array(
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => "https://api.instagram.com/v1/tags/$tag/media/recent?access_token=$access_token",
-            ));
-            $resp = curl_exec($curl);
-         curl_close($curl);
-          return $resp;
-        }
+Class FetchService
+{
 
+    public static function updateToken($token){
+        $tokenFile = fopen('token.txt', 'w');
+        fwrite($tokenFile, $token);
+        fclose($tokenFile);
+    }
 
-    static public function token()
+    public static function getToken(){
+        $tokenFile = fopen('token.txt', 'r');
+        $token = fread($tokenFile, max(filesize('token.txt'), 1));
+        fclose($tokenFile);
+        return $token;
+    }
+
+    static public function getAuthUrl()
+    {
+        $client_id = "f368a9bab5e4426c996b1859340f144e";
+        $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
+
+        return "https://api.instagram.com/oauth/authorize/?client_id=$client_id&redirect_uri=$redirect_uri&response_type=code&scope=basic+public_content";
+    }
+
+    static public function access_token($code)
     {
         $curl = curl_init();
-         $client_id = "f368a9bab5e4426c996b1859340f144e";
-         $redirect_uri = "http://botenarium.com";
+        $client_id = "f368a9bab5e4426c996b1859340f144e";
+        $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
 
-         // GET method for receiving code
-         curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => "https://api.instagram.com/oauth/authorize/?client_id=$client_id&redirect_uri=$redirect_uri&response_type=code",
-         ));
+        csrf_field();
+        $client_secret = "f2a78d0ba0af498cb947d26b7035571c";
 
-         $code = curl_exec($curl); // it is a code we need to send it to instagram for access_token
-
-         $client_secret = "f2a78d0ba0af498cb947d26b7035571c";
-
-         // POST method for receiving access_token
-         curl_setopt_array($curl, array(
+        // POST method for receiving access_token
+        curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL => 'https://api.instagram.com/oauth/access_token',
             CURLOPT_POST => 1,
@@ -51,14 +49,38 @@ Class FetchService {
                 "redirect_uri" => $redirect_uri,
                 "code" => $code,
             )
-         ));
+        ));
 
-         $result = curl_exec($curl);
+        $result = curl_exec($curl);
+        $result = json_decode($result);
+        $access_token = $result->access_token;
+        curl_close($curl);
+        return $access_token;
 
-         var_dump($result);
-//        $access_token = $result->access_token;
-//        curl_close($curl);
-//        return $access_token;
+    }
+
+    static public function fetch($tag)
+    {
+        $access_token = self::getToken();
+//        dd($access_token);
+        $url = "https://api.instagram.com/v1/tags/$tag/media/recent?access_token=$access_token";
+        $client_id = "f368a9bab5e4426c996b1859340f144e";
+        $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
+        csrf_field();
+        $client_secret = "f2a78d0ba0af498cb947d26b7035571c";
+
+        $curl = curl_init();
+
+        // POST method for receiving access_token
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $url,
+            )
+        );
+        $result = curl_exec($curl);
+        dd($result);
+        curl_close($curl);
+        //return view("campaigns.search",json_decode($result));
 
     }
 }
