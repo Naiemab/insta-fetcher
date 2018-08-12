@@ -40,7 +40,7 @@ class CampaignsController extends Controller
     {
         $tag = Input::get('tag');
         $Fetch_data = FetchService::fetch($tag);
-        return view('campaigns.search', array('results' => json_decode($Fetch_data)));
+        return view("campaigns.search", ['image_url' => $Fetch_data]);
     }
 
 

@@ -7,20 +7,22 @@ namespace App\Utils;
 Class FetchService
 {
 
-    public static function updateToken($token){
+    public static function updateToken($token)
+    {
         $tokenFile = fopen('token.txt', 'w');
         fwrite($tokenFile, $token);
         fclose($tokenFile);
     }
 
-    public static function getToken(){
+    public static function getToken()
+    {
         $tokenFile = fopen('token.txt', 'r');
         $token = fread($tokenFile, max(filesize('token.txt'), 1));
         fclose($tokenFile);
         return $token;
     }
 
-    static public function getAuthUrl()
+    public static function getAuthUrl()
     {
         $client_id = "f368a9bab5e4426c996b1859340f144e";
         $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
@@ -28,7 +30,7 @@ Class FetchService
         return "https://api.instagram.com/oauth/authorize/?client_id=$client_id&redirect_uri=$redirect_uri&response_type=code&scope=basic+public_content";
     }
 
-    static public function access_token($code)
+    public static function access_token($code)
     {
         $curl = curl_init();
         $client_id = "f368a9bab5e4426c996b1859340f144e";
@@ -59,28 +61,35 @@ Class FetchService
 
     }
 
-    static public function fetch($tag)
+    /**
+     * @param $tag
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public static function fetch($tag)
     {
         $access_token = self::getToken();
 //        dd($access_token);
         $url = "https://api.instagram.com/v1/tags/$tag/media/recent?access_token=$access_token";
-        $client_id = "f368a9bab5e4426c996b1859340f144e";
-        $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
         csrf_field();
-        $client_secret = "f2a78d0ba0af498cb947d26b7035571c";
 
         $curl = curl_init();
 
         // POST method for receiving access_token
         curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => $url,
             )
         );
         $result = curl_exec($curl);
-        dd($result);
+        $image_url = json_decode($result)->data[0]->images->standard_resolution->url;
+
+        return $image_url;
+//        echo '<pre>' . print_r((json_decode($result)), true) . '</pre>';
+//        echo "<br><br><br>";
+//        echo '<pre>' . print_r((json_decode($result)->data[0]->images->standard_resolution->url), true) . '</pre>';
+
         curl_close($curl);
-        //return view("campaigns.search",json_decode($result));
+
 
     }
 }

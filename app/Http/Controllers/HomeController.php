@@ -13,11 +13,12 @@ use App\Utils\FetchService;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $token = FetchService::getToken();
-        if(strlen($token) > 0){
+        if (strlen($token) > 0) {
             return redirect()->to('/campaigns');
-        }else{
+        } else {
             return redirect()->to(FetchService::getAuthUrl());
         }
     }
