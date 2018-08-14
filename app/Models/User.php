@@ -27,4 +27,9 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class, 'user_id');
+    }
 }
