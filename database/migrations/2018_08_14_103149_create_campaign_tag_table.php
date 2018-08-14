@@ -13,8 +13,11 @@ class CreateCampaignTagTable extends Migration
     public function up()
     {
         Schema::create('campaign_tag', function (Blueprint $table) {
-            $table->foreign('campaign_id')->references('id')->on('campaigns');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->unsignedInteger('campaign_id');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
+
+            $table->unsignedInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 
