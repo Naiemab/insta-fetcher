@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Campaign extends Model
 {
-    protected $guarded = ['id'];
+    protected $guarded = [];
+    protected $fillable = [];
 }
