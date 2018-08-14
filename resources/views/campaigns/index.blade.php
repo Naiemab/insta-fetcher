@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title> Campaign </title>
+    <title>Campaign</title>
     <style>
         input[type=text] {
             width: 15%;
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<p class="serif" style="font-size: 50px" align="center">Enter Your Campaign Name</p>
+<p class="serif" style="font-size: 50px" align="center"><b><em>Enter Your Campaign Name</em></b></p>
 
 <ol>
     <form action="{{ route('campaigns.store') }}" method="post">
@@ -42,6 +42,9 @@
         <div>
             <input type="text" name="name" placeholder="name"
                    style="margin-left:40%;margin-right:40%;display:block;margin-top:4%;margin-bottom:0%">
+            @if(session()->has('Message'))
+                <p style="color: red; margin-left: 40%">{{ session('Message') }}</p>
+            @endif
             <input type="submit" value="add"
                    style="margin-left:45%;margin-right:40%;display:block;margin-top:1%;margin-bottom:0%">
         </div>
