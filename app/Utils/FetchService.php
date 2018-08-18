@@ -2,8 +2,6 @@
 
 namespace App\Utils;
 
-// code for access_token = d83bc59f7e6e4a92a121be365cbc2beb
-
 Class FetchService
 {
 
@@ -68,7 +66,6 @@ Class FetchService
     public static function fetch($tag)
     {
         $access_token = self::getToken();
-//        dd($access_token);
         $url = "https://api.instagram.com/v1/tags/$tag/media/recent?access_token=$access_token";
         csrf_field();
 
@@ -81,15 +78,16 @@ Class FetchService
             )
         );
         $result = curl_exec($curl);
-        $image_url = json_decode($result)->data[0]->images->standard_resolution->url;
+        $images = [];
+        foreach (json_decode($result)->data as $data) {
+            $image_url = $data->images->standard_resolution->url;
+            $image_link = $data->link;
+            $images [] = ['image' => $image_url, 'link' => $image_link];
+        }
 
-        return $image_url;
-//        echo '<pre>' . print_r((json_decode($result)), true) . '</pre>';
-//        echo "<br><br><br>";
-//        echo '<pre>' . print_r((json_decode($result)->data[0]->images->standard_resolution->url), true) . '</pre>';
-
-        curl_close($curl);
-
+        return $images;
+//        curl_close($curl);
+//        return $image_url;
 
     }
 }
