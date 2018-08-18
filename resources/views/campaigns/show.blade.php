@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>{{ $campaign->name }}</title>
+    <title>{{ $campaign->name."'s tags" }}</title>
     <style>
         input[type=text] {
             width: 15%;
@@ -23,6 +23,11 @@
 
         p.serif {
             font-family: "Times New Roman", Times, serif;
+            font-size: 50px;
+            text-align: center;
+            margin-left: 35%;
+            margin-right: 44%;
+            margin-bottom: 0%
         }
 
         body {
@@ -34,19 +39,43 @@
 
 <body>
 
-<p class="serif" style="font-size: 50px; text-align: center; margin-left:35%;margin-right:44%; margin-bottom:0%">Enter Tag</p>
+<p class="serif"><b><em>Enter Tag</em></b></p>
 {{ csrf_field() }}
 <ul>
     <form action="/tag" method="post">
+        <input type="hidden" name="campaign_id" value="{{ $campaign->id }}">
         <input type="text" name="tag" placeholder="Enter Tag"
                style="margin-left:37%;margin-right:40%;display:block;margin-top:4%;margin-bottom:0%">
+        @if ($errors->any())
+            <div class="alert alert-danger"
+                 style="margin-left:35%;margin-right:43%;display:block;margin-top:1%;margin-bottom:0%;">
+                <ul style="list-style: none; color: red;  ">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if(session()->has('Message'))
+            <p style="color: red; margin-left: 40%">{{ session('Message') }}</p>
+        @endif
         <input type="submit" value="search"
                style="margin-left:41%;margin-right:40%;display:block;margin-top:1%;margin-bottom:0%">
     </form>
-    <li style="font-size: 30px;">
-        {{ $campaign->name }}
-    </li>
-    <a href="{{ route('campaigns.index') }}">
+    <ul style="font-size: 30px;">
+        {{ $campaign->name."'s tags" }}
+
+        @foreach($campaign->tags as $tag)
+            <ul>
+                <li>
+                    <a href="{{ route('tag.show' , $tag) }}">
+                        {{ $tag->tag_name }}
+                    </a>
+                </li>
+            </ul>
+        @endforeach
+    </ul>
+    <a href="{{ route('campaign.index') }}">
         Back
     </a>
 </ul>

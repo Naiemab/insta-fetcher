@@ -37,7 +37,7 @@
 <p class="serif" style="font-size: 50px" align="center"><b><em>Enter Your Campaign Name</em></b></p>
 
 <ol>
-    <form action="{{ route('campaigns.store') }}" method="post">
+    <form action="{{ route('campaign.store') }}" method="post">
         {{ csrf_field() }}
         <div>
             <input type="text" name="name" placeholder="name"
@@ -53,7 +53,7 @@
     @foreach($campaigns as $campaign)
         @if($campaign != null)
             <li style="font-size: 30px;">
-                <a href="{{ route('campaigns.show', $campaign) }}">
+                <a href="{{ route('campaign.show', $campaign) }}">
                     {{ $campaign->id }} {{ $campaign->name }}
                 </a>
             </li>
