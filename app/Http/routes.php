@@ -2,36 +2,51 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('token' , [
+Route::get('token', [
     'uses' => 'CampaignsController@token',
     'as' => 'campaigns.token'
 ]);
 
 Route::group([
     'middleware' => 'insta_token'
-], function (){
+], function () {
     Route::get('campaigns', [
-        'uses' => 'CampaignsController@index',
-        'as'  => 'campaigns.index'
+        'uses' => 'CampaignController@index',
+        'as' => 'campaign.index'
     ]);
 
     Route::get('campaigns/{campaign}', [
-        'uses' => 'CampaignsController@show',
-        'as'  => 'campaigns.show'
+        'uses' => 'CampaignController@show',
+        'as' => 'campaign.show'
     ]);
 
     Route::post('campaigns', [
-        'uses' => 'CampaignsController@store',
-        'as'  => 'campaigns.store'
+        'uses' => 'CampaignController@store',
+        'as' => 'campaign.store'
     ]);
 
-    Route::post('tag' , [
-        'uses' => 'CampaignsController@search',
-        'as'   => 'search_post.tag'
+    Route::post('tag', [
+        'uses' => 'TagController@store',
+        'as' => 'tag.store'
     ]);
 
-    Route::get('tag' , [
-        'uses' => 'CampaignsController@search',
-        'as'   => 'search_get.tag'
+    Route::get('tag', [
+        'uses' => 'TagController@show',
+        'as' => 'tag.show'
+    ]);
+
+    Route::get('tag/{tag}', [
+        'uses' => 'TagController@show',
+        'as' => 'tag.show'
+    ]);
+
+    Route::get('tag', [
+        'uses' => 'TagController@save',
+        'as' => 'tag.save'
     ]);
 });
+
+Route::get('test', [
+    'uses' => 'CampaignController@test',
+    'as' => 'test'
+]);
