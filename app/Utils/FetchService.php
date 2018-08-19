@@ -67,7 +67,6 @@ Class FetchService
     {
         $access_token = self::getToken();
         $url = "https://api.instagram.com/v1/tags/$tag/media/recent?access_token=$access_token";
-        csrf_field();
 
         $curl = curl_init();
 
@@ -85,9 +84,7 @@ Class FetchService
             $images [] = ['image' => $image_url, 'link' => $image_link];
         }
 
+        curl_close($curl);
         return $images;
-//        curl_close($curl);
-//        return $image_url;
-
     }
 }

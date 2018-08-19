@@ -3,7 +3,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('token', [
-    'uses' => 'CampaignsController@token',
+    'uses' => 'CampaignController@token',
     'as' => 'campaigns.token'
 ]);
 

@@ -42,8 +42,17 @@
         <div>
             <input type="text" name="name" placeholder="name"
                    style="margin-left:40%;margin-right:40%;display:block;margin-top:4%;margin-bottom:0%">
-            @if(session()->has('Message'))
-                <p style="color: red; margin-left: 40%">{{ session('Message') }}</p>
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <div class="alert alert-danger"
+                         style="margin-left:35%;margin-right:43%;display:block;margin-top:1%;margin-bottom:0%;">
+                        <ul style="list-style: none; color: red; margin-left: 25px;  ">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             @endif
             <input type="submit" value="add"
                    style="margin-left:45%;margin-right:40%;display:block;margin-top:1%;margin-bottom:0%">
