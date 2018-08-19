@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
 use App\Utils\FetchService;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCampaignRequest;
 use App\Models\Campaign;
 use Illuminate\Support\Facades\Input;
 use Prophecy\Exception\Doubler\InterfaceNotFoundException;
@@ -13,12 +12,19 @@ use Prophecy\Exception\Doubler\InterfaceNotFoundException;
 class CampaignController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $campaigns = Campaign::all();
         return view('campaigns.index', compact('campaigns'));
     }
 
+    /**
+     * @param Campaign $campaign
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Campaign $campaign)
     {
         return view('campaigns.show', compact('campaign'));
@@ -28,17 +34,13 @@ class CampaignController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreCampaignRequest $request)
     {
         $campaign = new Campaign();
         $campaign->name = $request->get('name');
-        if ($campaign->where('name', '=', $campaign->name)->count() > 0) {
-            return redirect()->back()->with(['Message' => "The Campaign is already available."]);
+        $campaign->save();
+        return redirect()->back();
 
-        } else {
-            $campaign->save();
-            return redirect()->back();
-        }
     }
 
 
