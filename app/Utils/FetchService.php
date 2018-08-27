@@ -2,21 +2,19 @@
 
 namespace App\Utils;
 
+use Illuminate\Support\Facades\Storage;
+
 Class FetchService
 {
 
     public static function updateToken($token)
     {
-        $tokenFile = fopen('token.txt', 'w');
-        fwrite($tokenFile, $token);
-        fclose($tokenFile);
+        Storage::disk('local')->put('token.txt', $token);
     }
 
     public static function getToken()
     {
-        $tokenFile = fopen('token.txt', 'r');
-        $token = fread($tokenFile, max(filesize('token.txt'), 1));
-        fclose($tokenFile);
+        $token = Storage::disk('local')->get('token.txt');
         return $token;
     }
 

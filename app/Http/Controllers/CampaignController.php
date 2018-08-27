@@ -87,11 +87,12 @@ class CampaignController extends Controller
      */
     public function test()
     {
+
 //          $tag = Tag::where('tag_name','=','')->delete();
-        Storage::disk('local')->put('token.txt', FetchService::access_token());
-        $token = Storage::disk('local')->get('token.txt');
-        var_dump($token);
-//        return Campaign::with('tags')->get();
+        $test = Storage::disk('local')->put('token.txt', "");
+//        $test = Storage::disk('local')->get('token.txt');
+        var_dump($test);
+//        return Campaigns::with('tags')->get();
 
 //        return Tag::with('campaigns')->get();
     }
