@@ -22,7 +22,7 @@ Class FetchService
 
     public static function getAuthUrl()
     {
-        $client_id = "f368a9bab5e4426c996b1859340f144e";
+        $client_id = env('INSTAGRAM_CLIENT_ID');
         $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
 
         return "https://api.instagram.com/oauth/authorize/?client_id=$client_id&redirect_uri=$redirect_uri&response_type=code&scope=basic+public_content";
@@ -31,11 +31,11 @@ Class FetchService
     public static function access_token($code)
     {
         $curl = curl_init();
-        $client_id = "f368a9bab5e4426c996b1859340f144e";
+        $client_id = env('INSTAGRAM_CLIENT_ID');
         $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
 
         csrf_field();
-        $client_secret = "f2a78d0ba0af498cb947d26b7035571c";
+        $client_secret = env('INSTAGRAM_CLIENT_SECRET');
 
         // POST method for receiving access_token
         curl_setopt_array($curl, array(
