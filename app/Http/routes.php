@@ -1,15 +1,26 @@
 <?php
 
-Route::get('/', 'HomeController@index');
-
-Route::get('token', [
-    'uses' => 'CampaignsController@token',
-    'as' => 'campaigns.token'
+Route::get('/', [
+    'uses' => 'HomeController@index',
+    'as' => 'home'
 ]);
 
+Route::get('token', [
+    'uses' => 'CampaignController@token',
+    'as' => 'campaign.token'
+]);
+
+Route::auth();
+
 Route::group([
-    'middleware' => 'insta_token'
+    'middleware' => ['insta_token','auth']
 ], function () {
+
+//    Route::get('/home', [
+//        'uses' => 'HomeController@index',
+//        'as' => 'home'
+//    ]);
+
     Route::get('campaigns', [
         'uses' => 'CampaignController@index',
         'as' => 'campaign.index'

@@ -85,9 +85,10 @@ Class FetchService
             $images [] = ['image' => $image_url, 'link' => $image_link];
         }
 
+        curl_close($curl);
+//        dd($images);
         return $images;
-//        curl_close($curl);
-//        return $image_url;
+
 
     }
 }

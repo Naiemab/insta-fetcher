@@ -61,5 +61,9 @@
     @endforeach
     <br><br>
 </ol>
+
+<li style="font-size: 30px;">
+    <a href="{{ route('home') }}">Back</a>
+</li>
 </body>
 </html>

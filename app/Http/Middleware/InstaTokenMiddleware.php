@@ -18,7 +18,6 @@ class InstaTokenMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
         $token = FetchService::getToken();
         if (strlen($token) > 0)
             return $next($request);

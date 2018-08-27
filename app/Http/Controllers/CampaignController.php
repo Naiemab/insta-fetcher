@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Utils\FetchService;
 use App\Http\Requests\StoreCampaignRequest;
 use App\Models\Campaign;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+
 use Prophecy\Exception\Doubler\InterfaceNotFoundException;
 
 
@@ -17,7 +20,8 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::all();
+        $user = Auth::user();
+        $campaigns = $user->campaigns()->get();
         return view('campaigns.index', compact('campaigns'));
     }
 
@@ -38,6 +42,7 @@ class CampaignController extends Controller
     {
         $campaign = new Campaign();
         $campaign->name = $request->get('name');
+        $campaign->user_id = Auth::user()->id;
         $campaign->save();
         return redirect()->back();
 

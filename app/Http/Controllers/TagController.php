@@ -30,11 +30,13 @@ class TagController extends Controller
     {
         $tag = new Tag();
         $tag->tag_name = $request->get('tag');
+        $similar_tag = Tag::where('tag_name', '=', "$tag->tag_name")->first();
+        if ($similar_tag) {
+            return redirect()->back()->with(['Message' => "The Tag is available"]);
+        }
+        $tag->save();
+        $tag->campaigns()->attach($request->get('campaign_id'));
         return redirect()->back();
-//        $similar_tag = Tag::where('tag_name', '=', "$tag->tag_name")->first();
-//        if ($similar_tag) {
-//            return redirect()->back()->with(['Message' => "The Tag is available"]);
-//        }
 //        } else if (strlen($tag->tag_name) < 1) {
 //            return redirect()->back()->with(['Message' => "The Tag must be at least 1 Character"]);
 //        } else {
