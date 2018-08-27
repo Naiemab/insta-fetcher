@@ -51,7 +51,7 @@
                  style="margin-left:35%;margin-right:43%;display:block;margin-top:1%;margin-bottom:0%;">
                 <ul style="list-style: none; color: red;  ">
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li><strong>{{ $error }}</strong></li>
                     @endforeach
                 </ul>
             </div>

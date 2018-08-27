@@ -9,6 +9,7 @@ use App\Models\Campaign;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
+use Illuminate\Support\Facades\Storage;
 use Prophecy\Exception\Doubler\InterfaceNotFoundException;
 
 
@@ -81,10 +82,17 @@ class CampaignController extends Controller
         return redirect()->to('/');
     }
 
+    /**
+     * @return Campaign[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function test()
     {
 //          $tag = Tag::where('tag_name','=','')->delete();
-        return Campaign::with('tags')->get();
+        Storage::disk('local')->put('token.txt', FetchService::access_token());
+        $token = Storage::disk('local')->get('token.txt');
+        var_dump($token);
+//        return Campaign::with('tags')->get();
+
 //        return Tag::with('campaigns')->get();
     }
 

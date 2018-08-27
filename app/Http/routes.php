@@ -10,10 +10,14 @@ Route::get('token', [
     'as' => 'campaign.token'
 ]);
 
+Route::get('privacy', function () {
+    return view('privacy');
+});
+
 Route::auth();
 
 Route::group([
-    'middleware' => ['insta_token','auth']
+    'middleware' => ['insta_token', 'auth']
 ], function () {
 
 //    Route::get('/home', [

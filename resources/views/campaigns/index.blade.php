@@ -48,7 +48,9 @@
                          style="margin-left:35%;margin-right:43%;display:block;margin-top:1%;margin-bottom:0%;">
                         <ul style="list-style: none; color: red; margin-left: 25px;  ">
                             @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                <div class="alert alert-danger">
+                                    <li><strong>{{ $error }}</strong></li>
+                                </div>
                             @endforeach
                         </ul>
                     </div>
@@ -61,11 +63,11 @@
 
     @foreach($campaigns as $campaign)
         @if($campaign != null)
-            <li style="font-size: 30px;">
+            <ul style="font-size: 30px;">
                 <a href="{{ route('campaign.show', $campaign) }}">
-                    {{ $campaign->id }} {{ $campaign->name }}
+                    {{ $campaign->id }}. {{ $campaign->name }}
                 </a>
-            </li>
+            </ul>
         @endif
     @endforeach
     <br><br>

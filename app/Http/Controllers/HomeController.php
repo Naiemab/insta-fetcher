@@ -27,7 +27,6 @@ class HomeController extends Controller
     {
         $token = FetchService::getToken();
         if (strlen($token) > 0) {
-//            return redirect()->to('/campaigns');
             return view("home");
         } else {
             return redirect()->to(FetchService::getAuthUrl());
