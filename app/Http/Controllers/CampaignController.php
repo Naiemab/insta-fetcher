@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Utils\FetchService;
 use App\Http\Requests\StoreCampaignRequest;
@@ -88,12 +89,10 @@ class CampaignController extends Controller
     public function test()
     {
 
-//          $tag = Tag::where('tag_name','=','')->delete();
-        $test = Storage::disk('local')->put('token.txt', "");
-//        $test = Storage::disk('local')->get('token.txt');
-        var_dump($test);
-//        return Campaigns::with('tags')->get();
-
+//          $tag = Tag::find(7)->delete();
+        return Campaign::with('tags')->get();
+//            $test = Campaign::find(3)->delete();
+//            var_dump($test);
 //        return Tag::with('campaigns')->get();
     }
 

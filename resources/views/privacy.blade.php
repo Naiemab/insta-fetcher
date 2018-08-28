@@ -1,93 +1,46 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Privacy</title>
+@extends('layouts.app')
 
 
-</head>
-<body>
-<div class="container-fluid">
-    <h1>Hello World!
-        <small>Small text
-    </h1>
-    <p class="text-black bg-info">This is a container</p><br><br>
-    <p>
-        this is a <kbd>Paragraph</kbd>
-    </p>
-</div>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-    </tr>
-    <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-    </tr>
-    <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-    </tr>
-    </tbody>
-</table>
-<table class="table table-dark table-striped ">
-    <thead-light>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Password</th>
-        </tr>
-    </thead-light>
-    <tbody>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>123456</td>
-    </tr>
-    <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-        <td>123456</td>
-    </tr>
-    <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-        <td>123456</td>
-    </tr>
-    </tbody>
-</table>
+@section('content')
 
-</div>
+    <div class="container-fluid" style="font-size: 20px">
+        <h1 class="serif" style="font-size: 50px" align="center"><b>Fetcher's Privacy and Policy</b></h1>
+        <div class="container-fluid bg-light" style="width: 92%">
+            <br>
+            <p> Fetcher is a service which based on a website and you can use it to access recent media with specific
+                tag .<br><br>
+                If you have any questions or comments about this Privacy Policy, please contact us at :
+            <p class="text-primary">developfetcher@gmail.com</p><br>
 
-<div class="jombotron jombotron-fluid">
-    <div class="container">
-        <h1>This is a extra text</h1>
-        <p>This is a paragraph</p>
+            <p class="title">
+                <mark><strong>Cookies </strong></mark>
+            </p>
+            <p>Like many apps, we use cookies to improve our Service but we do not require cookies for many parts of our Services, such as searching and looking at public users.</p><br>
+
+            <p class="title">
+                <mark><strong>information we collect</strong></mark>
+            </p>
+            <p>we only collect media from public content and public users .</p><br>
+
+            <p class="title">
+                <mark><strong>Changes to this Policy</strong></mark>
+            </p>
+            <p>We may revise this Privacy Policy from time to time. The most current version of the policy will govern
+                our
+                use of your information and will always be at
+                <a href="https://n.abdollahi.hinzaco.com/privacy">https://n.abdollahi.hinzaco.com/privacy</a>. <br>If we
+                make a change to this policy that in our sole discretion, is material, we will update <a
+                        href="https://n.abdollahi.hinzaco.com/privacy">https://n.abdollahi.hinzaco.com/privacy</a>. By
+                continuing to access or use the Services after those changes become effective, you agree to be bound by
+                the
+                revised Privacy Policy.
+                <br>
+            </p>
+            <p class="text-center" style="font-size: 30px"><strong>We run all <a href="https://www.instagram.com/">instagram </a>rules
+                    .</strong>
+            </p>
+
+        </div>
     </div>
-</div>
 
-</body>
-</html>
+@endsection

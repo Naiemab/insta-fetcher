@@ -15,7 +15,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+     {{--<link href="{{ elixir('css/app.css') }}" rel="stylesheet">--}}
 
     <style>
         body {
@@ -26,6 +26,8 @@
             margin-right: 6px;
         }
     </style>
+
+    @yield('css')
 </head>
 <body id="app-layout">
 <nav class="navbar navbar-default navbar-static-top">
@@ -58,7 +60,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/campaigns') }}">Campaigns</a></li>
                 </ul>
-
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/privacy') }}">Privacy and Policy</a></li>
+                </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -79,6 +83,7 @@
                     @endif
                 </ul>
             </div>
+        </div>
         </div>
 </nav>
 
