@@ -3,10 +3,7 @@
 @section('css')
     <style>
         .error-container {
-            margin-left: 35%;
-            margin-right: 43%;
-            margin-top: 1%;
-            margin-bottom: 0;
+            margin: 1% 43% 0 35%;
             display: block;
         }
     </style>
@@ -57,12 +54,10 @@
             <br><br>
         </ol>
 
-        <li style="font-size: 30px;">
+        <li style=";font-size: 30px;">
             <a href="{{ route('home') }}">Back</a>
         </li>
 
     </div>
 
 @endsection
-{{--</body>--}}
-{{--</html>--}}

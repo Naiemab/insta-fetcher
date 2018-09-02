@@ -1,30 +1,30 @@
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li><strong>{{ $error }}</strong></li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@extends('layouts.app')
 
-<html>
-<head>
+@section('css')
     <style>
-        body {
-            background-color: #8c8c8c;
-        }
-
-        img {
+        .error-container {
+            margin-left: 35%;
+            margin-right: 43%;
+            margin-top: 1%;
+            margin-bottom: 0;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
     </style>
-</head>
+@endsection
 
-<body>
-{{ csrf_field() }}
-<img src="{{ $image_url }}">
-</body>
-</html>
+@section('content')
+
+    @if ($errors->any())
+        <div class="error-container">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li><strong>{{ $error }}</strong></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    {{ csrf_field() }}
+    <img src="{{ $image_url }}">
+
+@endsection

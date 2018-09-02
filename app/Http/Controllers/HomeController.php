@@ -9,16 +9,6 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -27,7 +17,7 @@ class HomeController extends Controller
     {
         $token = FetchService::getToken();
         if (strlen($token) > 0) {
-            return view("home");
+            return view("welcome");
         } else {
             return redirect()->to(FetchService::getAuthUrl());
         }

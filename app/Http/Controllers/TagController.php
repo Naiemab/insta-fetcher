@@ -46,4 +46,26 @@ class TagController extends Controller
 //        }
 //    }
     }
+
+    public function save(Request $request)
+    {
+        $storeArray = [];
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, "save") !== false) {
+                $parts = explode("-", $key);
+                $id = $parts[1];
+
+                $image_url = $request["image-{$id}"];
+                $image_link = $request["link-{$id}"];
+                $storeArray [] = ['image' => $image_url, 'link' => $image_link];
+            }
+        }
+//        foreach ($storeArray as $key => $value)
+//            echo "<img src=" . $value['image'] . ">"."\t";
+        if ($storeArray)
+            return redirect()->back()->with(["Message" => "Images successfully Saved"]);
+        else
+            return redirect()->back()->with(["Message" => "Please Select at least 1 image"]);
+    }
+
 }

@@ -1,132 +1,132 @@
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
+@section('css')
     <style>
-        .container {
-            display: block;
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-size: 22px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
 
-        /* Hide the browser's default checkbox */
-        .container input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        /* Create a custom checkbox */
-        .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 25px;
-            width: 25px;
-            background-color: #eee;
-        }
-
-        /* On mouse-over, add a grey background color */
-        .container:hover input ~ .checkmark {
-            background-color: #ccc;
-        }
-
-        /* When the checkbox is checked, add a blue background */
-        .container input:checked ~ .checkmark {
-            background-color: #2196F3;
-        }
-
-        /* Create the checkmark/indicator (hidden when not checked) */
-        .checkmark:after {
-            content: "";
-            position: absolute;
+        .material-switch > input[type="checkbox"] {
             display: none;
         }
 
-        /* Show the checkmark when checked */
-        .container input:checked ~ .checkmark:after {
-            display: block;
+        .material-switch > label {
+            cursor: pointer;
+            height: 0px;
+            position: relative;
+            width: 40px;
         }
 
-        /* Style the checkmark/indicator */
-        .container .checkmark:after {
-            left: 9px;
-            top: 5px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+        .material-switch > label::before {
+            background: rgb(0, 0, 0);
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            content: '';
+            height: 16px;
+            margin-top: -8px;
+            position: absolute;
+            opacity: 0.3;
+            transition: all 0.4s ease-in-out;
+            width: 40px;
         }
 
-        p.serif {
-            font-family: "Times New Roman", Times, serif;
-            font-size: 50px;
-            text-align: center;
-            margin-left: 35%;
-            margin-right: 44%;
-            margin-bottom: 0%
+        .material-switch > label::after {
+            background: rgb(255, 255, 255);
+            border-radius: 16px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+            content: '';
+            height: 24px;
+            left: -4px;
+            margin-top: -8px;
+            position: absolute;
+            top: -4px;
+            transition: all 0.3s ease-in-out;
+            width: 24px;
         }
 
-        img {
-
+        .material-switch > input[type="checkbox"]:checked + label::before {
+            background: inherit;
+            opacity: 0.5;
         }
 
-        input {
-            padding: 10px 20px;
-        }
-
-        body {
-            background-color: #8c8c8c;
+        .material-switch > input[type="checkbox"]:checked + label::after {
+            background: inherit;
+            left: 20px;
         }
 
         .image-container {
             display: flex;
             justify-content: center;
-            align-items: center;
+            margin-left: auto;
             margin-bottom: 20px;
         }
-        .image-link {
-            margin-right: 50px;
-        }
+
         .image {
-            width: 250px;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            width: 200px;
         }
+
+        .check-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .button {
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .message {
+            display: flex;
+            margin: 15px auto auto;
+            justify-content: center;
+        }
+
     </style>
-</head>
 
+@endsection
 
-<body>
-@foreach($images as $image)
-    <div class="image-container">
-        <a class="image-link" href="{{ $image['link']  }}">
-            <img class="image" src="{{  $image['image']  }}">
-        </a>
+@section('content')
+    <div class="container-fluid">
+        <?php $counter = 1; ?>
         <form action="{{  route("tag.save")  }}">
-            <label class="container">Save
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
+            @foreach($images as $image)
+                <div class="image-container col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <a class="image-link" href="{{ $image['link']  }}">
+                        <img class="image" src="{{  $image['image']  }}">
+                    </a>
+                    <div class="check-form">
+                        <input type="hidden" name="link-{{ $counter }}" value="{{ $image['link'] }}">
+                        <input type="hidden" name="image-{{ $counter }}" value="{{ $image['image'] }}">
+                        <li class="list-group-item" style="margin-left: 20px">
+                            <span style="margin-right: 15px">Save</span>
+                            <div class="material-switch pull-right">
+                                <input id="save-{{ $counter }}" name="save-{{ $counter }}" type="checkbox"/>
+                                <label for="save-{{ $counter }}" class="label-primary"></label>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+                <?php $counter++; ?>
+            @endforeach
+            <div class="clearfix"></div>
+            <input class="btn btn-success button" value="Submit" type="submit"/>
         </form>
+
+        @if(session()->has('Message'))
+            <div class="alert alert-success col-xl-6 col-lg-12 col-md-6 col-sm-12 message">
+                <ul style="list-style: none; ">
+                    <li style="display: flex; justify-content: center;">{{ session('Message') }}</li>
+                </ul>
+            </div>
+        @endif
+        <div class="clearfix"></div>
+        <ul>
+            <li>
+                <a href="{{ route('campaign.index') }}" style="font-size: 30px">
+                    Back
+                </a>
+            </li>
+        </ul>
     </div>
-@endforeach
-<ul>
-    <li>
-        <a href="{{ route('campaign.index') }}">
-            Back
-        </a>
-    </li>
-</ul>
-
-</body>
-
-</html>
+@endsection

@@ -20,11 +20,6 @@ Route::group([
     'middleware' => ['insta_token', 'auth']
 ], function () {
 
-    Route::get('/home', [
-        'uses' => 'HomeController@index',
-        'as' => 'home'
-    ]);
-
     Route::get('campaigns', [
         'uses' => 'CampaignController@index',
         'as' => 'campaign.index'

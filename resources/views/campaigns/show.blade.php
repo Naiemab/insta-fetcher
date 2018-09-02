@@ -9,6 +9,14 @@
             margin-bottom: 0;
             display: block;
         }
+        .input-group-addon
+        {
+            background-color: #f8f8f8;
+        }
+        .input-group .input-group-addon + .form-control
+        {
+            border-left:none;
+        }
     </style>
 @endsection
 
@@ -24,7 +32,12 @@
                     <div class="col-md-4" style="margin-left: 30%">
                         <label for="tag">Tag Name :</label>
                         <input type="hidden" name="campaign_id" value="{{ $campaign->id }}">
-                        <input type="text" name="tag" id="tag" placeholder="Enter Tag" class="form-control">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-hashtag"></i>
+                            </span>
+                            <input type="text" name="tag" id="tag" class="form-control" placeholder="Enter Tag Name">
+                        </div>
                     </div>
                     <br><br><br>
 
@@ -46,8 +59,8 @@
                         </div>
                     @endif
 
-                    <input type="submit" class="btn btn-info" value="search"
-                           style="margin-left:43%;margin-right:40%;display:block;margin-top:1%;margin-bottom:0%">
+                        <input type="submit" class="btn btn-info" value="search"
+                               style="margin-left:43%;margin-right:40%;display:block;margin-top:1%;margin-bottom:0%">
                 </div>
             </form>
 
