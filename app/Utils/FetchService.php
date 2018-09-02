@@ -83,7 +83,6 @@ Class FetchService
         }
 
         curl_close($curl);
-//        dd($images);
         return $images;
     }
 }

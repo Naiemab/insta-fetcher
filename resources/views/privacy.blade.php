@@ -7,7 +7,7 @@
         <h1 class="serif" style="font-size: 50px" align="center"><b>Fetcher's Privacy and Policy</b></h1>
         <div class="container-fluid bg-light" style="width: 92%">
             <br>
-            <p> Fetcher is a service which based on a website and you can use it to access recent media with specific
+            <p> Fetcher is a service which based on a website and you can use it to access recent media with your account and receive images with specific
                 tag .<br><br>
                 If you have any questions or comments about this Privacy Policy, please contact us at :
             <p class="text-primary">developfetcher@gmail.com</p><br>

@@ -37,14 +37,6 @@ class TagController extends Controller
         $tag->save();
         $tag->campaigns()->attach($request->get('campaign_id'));
         return redirect()->back();
-//        } else if (strlen($tag->tag_name) < 1) {
-//            return redirect()->back()->with(['Message' => "The Tag must be at least 1 Character"]);
-//        } else {
-//            $tag->save();
-//            $tag->campaigns()->attach($request->get('campaign_id'));
-//            return redirect()->back();
-//        }
-//    }
     }
 
     public function save(Request $request)
