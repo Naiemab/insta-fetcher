@@ -15,8 +15,8 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
            $table->increments('id');
-           $table->string('media_path');
-           $table->string('url');
+           $table->string('media_path', 500);
+           $table->string('url', 500);
 
            $table->unsignedInteger('user_id');
            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
