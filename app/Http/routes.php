@@ -1,6 +1,10 @@
 <?php
 
-Route::get('/', [
+Route::get('/',function() {
+    return view("welcome");
+})->name('/');
+
+Route::get('/home', [
     'uses' => 'HomeController@index',
     'as' => 'home'
 ]);
@@ -24,6 +28,7 @@ Route::auth();
 Route::group([
     'middleware' => ['insta_token', 'auth']
 ], function () {
+
 
     Route::get('campaigns', [
         'uses' => 'CampaignController@index',
@@ -58,6 +63,11 @@ Route::group([
     Route::get('tag', [
         'uses' => 'TagController@saveImages',
         'as' => 'tag.save'
+    ]);
+
+    Route::get('images', [
+        'uses' => 'ImageController@index',
+        'as' => 'images'
     ]);
 });
 

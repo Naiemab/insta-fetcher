@@ -2,7 +2,9 @@
 
 namespace App\Utils;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 Class FetchService
 {
@@ -14,7 +16,9 @@ Class FetchService
     // Modify token ( if needed ) and update it
     public static function updateToken($token)
     {
-        Storage::disk('local')->put('token.txt', $token);
+        $user = User::all()->where("username",Auth::user()->username)->first();
+        $user->access_token = $token;
+        $user->save();
     }
 
 
@@ -24,8 +28,8 @@ Class FetchService
     // Read token from database
     public static function getToken()
     {
-        $token = Storage::disk('local')->get('token.txt');
-        return $token;
+        $user = User::all()->where("username",Auth::user()->username)->first()->access_token;
+        return $user;
     }
 
 

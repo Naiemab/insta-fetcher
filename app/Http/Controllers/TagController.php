@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Tag;
 use App\Models\Campaign;
 use App\Utils\FetchService;
+use App\Models\Media;
+use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
@@ -19,7 +21,7 @@ class TagController extends Controller
     {
         $tag = Tag::where('id', '=', $id)->first();
         $images = FetchService::fetch($tag->tag_name);
-        return view('tags.show', compact('images'));
+        return view('tags.show', compact('images', 'tag'));
     }
 
     /**
@@ -46,6 +48,10 @@ class TagController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     // Save images user selected
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveImages(Request $request)
     {
         $storeArray = [];
@@ -59,11 +65,18 @@ class TagController extends Controller
                 $storeArray [] = ['image' => $image_url, 'link' => $image_link];
             }
         }
-//        foreach ($storeArray as $key => $value)
-//            echo "<img src=" . $value['image'] . ">"."\t";
-        if ($storeArray)
+
+        if ($storeArray) {
+            foreach ($storeArray as $item) {
+                $media = new Media();
+                $media->media_path = $item['image'];
+                $media->url = $item['link'];
+                $media->user_id = Auth::user()->id;
+                $media->tag_id = $request->get('tag_id');
+                $media->save();
+            }
             return redirect()->back()->with(["Message" => "Images successfully Saved"]);
-        else
+        } else
             return redirect()->back()->with(["Message" => "Please Select at least 1 image"]);
     }
 
