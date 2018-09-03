@@ -51,7 +51,7 @@ Route::group([
     ]);
 
     Route::get('tag', [
-        'uses' => 'TagController@save',
+        'uses' => 'TagController@saveImages',
         'as' => 'tag.save'
     ]);
 });

@@ -13,6 +13,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // check access_token :  if token is available show welcome page , else go to instagram page to authorize
     public function index()
     {
         $token = FetchService::getToken();

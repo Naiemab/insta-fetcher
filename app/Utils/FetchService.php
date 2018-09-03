@@ -7,30 +7,51 @@ use Illuminate\Support\Facades\Storage;
 Class FetchService
 {
 
+
+    /**
+     * @param $token
+     */
+    // Modify token ( if needed ) and update it
     public static function updateToken($token)
     {
         Storage::disk('local')->put('token.txt', $token);
     }
 
+
+    /**
+     * @return mixed
+     */
+    // Read token from database
     public static function getToken()
     {
         $token = Storage::disk('local')->get('token.txt');
         return $token;
     }
 
+
+    /**
+     * @return string
+     */
+    // pass user to instagram authentication page
     public static function getAuthUrl()
     {
         $client_id = env('INSTAGRAM_CLIENT_ID');
-        $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
+        $redirect_uri = env("REDIRECT_URI");
 
         return "https://api.instagram.com/oauth/authorize/?client_id=$client_id&redirect_uri=$redirect_uri&response_type=code&scope=basic+public_content";
     }
 
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    // get access token with received code in getAuthUrl
     public static function access_token($code)
     {
         $curl = curl_init();
         $client_id = env('INSTAGRAM_CLIENT_ID');
-        $redirect_uri = "https://n.abdollahi.hinzaco.com/token";
+        $redirect_uri = env("REDIRECT_URI");
 
         csrf_field();
         $client_secret = env('INSTAGRAM_CLIENT_SECRET');
@@ -57,10 +78,12 @@ Class FetchService
 
     }
 
+
     /**
      * @param $tag
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return array
      */
+    // Get Fetched images with specific tag
     public static function fetch($tag)
     {
         $access_token = self::getToken();

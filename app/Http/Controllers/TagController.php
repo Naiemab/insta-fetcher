@@ -26,6 +26,7 @@ class TagController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+    // save tags in database if tag is repetitive show error message
     public function store(StoreTagRequest $request)
     {
         $tag = new Tag();
@@ -39,7 +40,13 @@ class TagController extends Controller
         return redirect()->back();
     }
 
-    public function save(Request $request)
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    // Save images user selected
+    public function saveImages(Request $request)
     {
         $storeArray = [];
         foreach ($request->all() as $key => $value) {
