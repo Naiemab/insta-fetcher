@@ -90,6 +90,7 @@
     <div class="container-fluid">
         <?php $counter = 1; ?>
         <form action="{{  route("tag.save")  }}">
+            <input type="hidden" name="tag_id" value="{{  $tag->id  }}">
             @foreach($images as $image)
                 <div class="image-container col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <a class="image-link" href="{{ $image['link']  }}">
