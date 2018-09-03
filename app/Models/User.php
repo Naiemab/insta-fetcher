@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Campaign::class, 'user_id');
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class,'user_id');
+    }
 }

@@ -10,4 +10,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(Campaign::class, 'campaign_tag', 'tag_id', 'campaign_id');
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class,'tag_id');
+    }
 }
