@@ -45,7 +45,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="{{ route('/') }}">
                 insta Fetcher
             </a>
         </div>
@@ -53,14 +53,19 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ route('home') }}"><i class="fa fa-home" style="font-size: 22px;"></i></a></li>
+                <li><a href="{{ route('/') }}"><i class="fa fa-home" style="font-size: 22px;"></i></a></li>
             </ul>
 
             <div class="navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @if (Auth::user())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/campaigns') }}">Campaigns</a></li>
                 </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ route('images') }}">Saved Images</a></li>
+                    </ul>
+                @endif
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/privacy') }}">Privacy and Policy</a></li>
                 </ul>
