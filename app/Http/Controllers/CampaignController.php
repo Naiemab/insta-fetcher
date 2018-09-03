@@ -88,12 +88,10 @@ class CampaignController extends Controller
      */
     public function test()
     {
-
+        return User::all();
 //          $tag = Tag::find(7)->delete();
-        return Campaign::with('tags')->get();
+//        return Campaign::with('tags')->get();
 //            $test = Campaign::find(3)->delete();
-//            var_dump($test);
-//        return Tag::with('campaigns')->get();
     }
 
 }
