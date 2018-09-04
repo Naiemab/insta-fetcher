@@ -86,7 +86,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <p style="font-size: 14px ; color: #979ba7; text-align: center;">By clicking "Register", you agree
+                                    <p style="font-size: 14px ; color: #5b5d61; text-align: center;">By clicking "Register", you agree
                                         <a href="https://n.abdollahi.hinzaco.com/privacy">Privacy Policy </a></p>
                                 </div>
                             </div>
