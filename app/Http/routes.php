@@ -18,10 +18,6 @@ Route::get('privacy', function () {
     return view('privacy');
 });
 
-Route::get('test', [
-    'uses' => 'CampaignController@test',
-    'as' => 'test'
-]);
 
 Route::auth();
 

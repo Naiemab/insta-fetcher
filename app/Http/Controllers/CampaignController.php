@@ -83,16 +83,6 @@ class CampaignController extends Controller
         return redirect()->to('/');
     }
 
-    /**
-     * @return Campaign[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
-     */
-    public function test()
-    {
-//        abort(404);
-//        $delete = User::find(6)->delete();
-        return User::all();
-//        return Campaign::with('tags')->get();
-    }
 
 }
 
