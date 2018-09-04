@@ -44,13 +44,13 @@
             <h1>Your Campaign's Names</h1>
             @foreach($campaigns as $campaign)
                 @if($campaign != null)
-                    <ul style="font-size: 30px;">
+                    <uyl style="font-size: 30px;">
                         <li>
                             <a href="{{ route('campaign.show', $campaign) }}">
                                 {{ $campaign->name }}
                             </a>
                         </li>
-                    </ul>
+                    </uyl>
                 @endif
             @endforeach
             <br><br>

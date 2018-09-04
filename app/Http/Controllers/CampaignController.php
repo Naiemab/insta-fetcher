@@ -89,13 +89,9 @@ class CampaignController extends Controller
     public function test()
     {
 //        abort(404);
-        return Auth::user()->media[0]['media_path'];
-//        $user = User::all()->where("username",Auth::user()->username)->first();
 //        $delete = User::find(6)->delete();
-//        return User::all();
-//          $tag = Tag::find(7)->delete();
+        return User::all();
 //        return Campaign::with('tags')->get();
-//            $test = Campaign::find(3)->delete();
     }
 
 }
