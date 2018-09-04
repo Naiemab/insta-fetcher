@@ -86,6 +86,13 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
+                                    <p style="font-size: 14px ; color: #979ba7; text-align: center;">By clicking "Register", you agree
+                                        <a href="https://n.abdollahi.hinzaco.com/privacy">Privacy Policy </a></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display: flex;justify-content: center;">
+                                <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i> Register
                                     </button>
